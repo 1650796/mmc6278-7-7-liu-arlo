@@ -138,11 +138,11 @@ router.post('/login', async (req, res) => {
     if (!isCorrectPassword) 
       return res.status(400).send('Username or password is incorrect')
     // If the password matches, set req.session.loggedIn to true
-    // set req.session.userId to the user's id
     req.session.loggedIn = true
+    // set req.session.userId to the user's id
     req.session.userId = user.id
-  // call req.session.save and in the callback redirect to /
-  req.session.save(() => res.redirect('/'))
+    // call req.session.save and in the callback redirect to /
+    req.session.save(() => res.redirect('/'))
 
   } catch(err) {
     res.status(500).send('Error creating User: ' + err.message || err.sqlMessage)
