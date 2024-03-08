@@ -104,7 +104,7 @@ router.post('/user', async (req, res) => {
       [username, hash]
     )
   // and redirect the user to the /login page
-  res.redirect('/user')
+  res.redirect('/login')
 
 } catch(err) {
   // if an error occurs with a code property equal to 'ER_DUP_ENTRY'
@@ -136,8 +136,9 @@ router.post('/login', async (req, res) => {
     // If the password is wrong, return a 400 status code
     if (!isCorrectPassword) return res.status(400).send("Username or password is incorrect.")
     // If the password matches, set req.session.loggedIn to true
-    req.session.loggedIn
+    req.session.loggedIn = true
     // set req.session.userId to the user's id
+    req.session.userId = user.id
     // call req.session.save and in the callback redirect to /
     req.session.save(() => res.redirect('/'))
 
